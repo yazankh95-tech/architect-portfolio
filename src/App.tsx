@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { WebGLShader } from './components/WebGLShader';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight, Mail, MessageSquare } from 'lucide-react';
 import './index.css';
 import { projects } from './data/projectsData';
 import type { Project } from './data/projectsData';
@@ -97,9 +97,16 @@ function App() {
         {/* Contact Section */}
         <section className="container contact-section" id="contact">
           <h2>Let's build together.</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', margin: '2rem 0' }}>
-            <a href="mailto:yazankh.95@gmail.com" className="contact-link">yazankh.95@gmail.com</a>
-            <a href="https://wa.me/966534782775" className="contact-link" target="_blank" rel="noreferrer">WhatsApp: +966 53 478 2775</a>
+          <div className="contact-actions" style={{ margin: '2rem 0' }}>
+            <a href="mailto:yazankh.95@gmail.com" className="contact-link contact-action">
+              <Mail size={18} />
+              <span>Click Here to Contact by Email</span>
+            </a>
+
+            <a href="https://wa.me/966534782775" className="contact-link contact-action" target="_blank" rel="noreferrer">
+              <MessageSquare size={18} />
+              <span>Click Here to Contact By WhatsApp</span>
+            </a>
           </div>
           <p style={{ color: 'var(--color-text-muted)' }}>Riyadh, Saudi Arabia</p>
         </section>
