@@ -98,7 +98,7 @@ function App() {
         <section className="container contact-section" id="contact">
           <h2>Let's build together.</h2>
           <div className="contact-actions" style={{ margin: '2rem 0' }}>
-            <a href="mailto:yazankh.95@gmail.com" className="contact-link contact-action">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yazankh.95@gmail.com&su=Contact%20from%20Portfolio" className="contact-link contact-action" target="_blank" rel="noopener noreferrer" title="Open Gmail compose">
               <Mail size={18} />
               <span>Click Here to Contact by Email</span>
             </a>
