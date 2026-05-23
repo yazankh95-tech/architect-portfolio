@@ -32,8 +32,8 @@ export function WebGLShader() {
         void main() {
           vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
           
-          // Shift the golden wave line down to the bottom (-0.75 y-offset) and slow it down
-          float waveY = p.y + 0.75 + sin((p.x + time * 0.25) * 0.8) * 0.15;
+          // Shift the golden wave line down to the bottom (-0.75 y-offset) and speed it up slightly (0.45) to ensure visible animation
+          float waveY = p.y + 0.75 + sin((p.x + time * 0.45) * 0.8) * 0.15;
           float d = length(p) * 0.05;
 
           float rx = waveY * (1.0 + d);

@@ -85,5 +85,17 @@ export const projects: Project[] = [
       "/projects/Wicht Resturant/YK Design Group 1_page-0031.jpg",
       "/projects/Wicht Resturant/YK Design Group 1_page-0032.jpg"
     ]
+  },
+  {
+    title: "Luxury Palace",
+    desc: "Architecture & Design",
+    img: "/projects/Luxury Palace/1.jpg",
+    images: [
+      "/projects/Luxury Palace/1.jpg",
+      "/projects/Luxury Palace/2.jpg",
+      "/projects/Luxury Palace/3.jpg",
+      "/projects/Luxury Palace/4.jpg",
+      "/projects/Luxury Palace/5.jpg"
+    ]
   }
 ];
