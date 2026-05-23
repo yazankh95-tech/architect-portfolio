@@ -19,7 +19,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
   overflow-y: scroll;
 }
 
@@ -70,15 +69,24 @@ h2 {
   padding: 0 2rem;
 }
 
-/* Each section snaps and fills at least one viewport */
+/* Each section fills at least one viewport */
 section {
-  scroll-snap-align: start;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 6rem;
   padding-bottom: 4rem;
+  position: relative;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              -webkit-backdrop-filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+section.in-view {
+  background-color: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* Glassmorphism Utilities */
@@ -138,10 +146,18 @@ section {
   .hero-content {
     flex-direction: column-reverse;
     text-align: center;
-    margin-top: 6rem;
+    margin-top: 4rem;
+    gap: 2rem;
   }
   .hero-subtitle {
     margin: 0 auto 2rem;
+    font-size: 1rem;
+  }
+  .hero-image img {
+    max-width: 280px;
+  }
+  h1 {
+    font-size: clamp(2rem, 7vw, 3.5rem);
   }
 }
 
@@ -153,15 +169,21 @@ section {
   font-weight: 300;
 }
 
-/* Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
 
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
 .project-card {
-  height: 400px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -169,6 +191,20 @@ section {
   position: relative;
   border-radius: 24px;
   border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.08);
+}
+
+@media (max-width: 640px) {
+  .project-card {
+    height: 280px;
+    border-radius: 16px;
+  }
 }
 
 .project-card img {
@@ -189,20 +225,24 @@ section {
 .project-info {
   position: relative;
   z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.4) 60%, transparent);
   padding: 2rem;
   width: 100%;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .project-info h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 .project-info p {
   color: var(--color-text-muted);
   font-size: 0.9rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
 /* Navigation / Header */
@@ -357,14 +397,17 @@ nav a:hover {
 
 @media (max-width: 768px) {
   .modal-overlay {
-    padding: 1rem;
+    padding: 0.5rem;
   }
   .modal-content {
-    max-height: 85vh;
+    max-height: 90vh;
+    border-radius: 16px;
   }
   .modal-nav {
-    display: none;
+    padding: 0.5rem;
   }
+  .modal-nav.left { left: 0.25rem; }
+  .modal-nav.right { right: 0.25rem; }
 }
 
 .contact-link:hover {
@@ -518,3 +561,53 @@ nav a:hover {
 
 .modal-nav.left { left: 1rem; }
 .modal-nav.right { right: 1rem; }
+
+/* Responsive Overrides & Premium Polish */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem 0;
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-panel {
+    padding: 1.75rem;
+    border-radius: 18px;
+  }
+
+  section {
+    padding-top: 5.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Make sure hero section buttons size beautifully */
+  .hero-text a.glass-panel {
+    padding: 1.25rem 2.25rem !important;
+    font-size: 0.95rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .skill-card {
+    padding: 1.25rem 1.5rem;
+    min-width: 120px;
+  }
+  .skill-icon img {
+    width: 60px;
+    height: 60px;
+  }
+  .skill-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .contact-action {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+}
