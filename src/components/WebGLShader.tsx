@@ -23,7 +23,7 @@ export function WebGLShader() {
         }
       `
 
-      // Fragment shader - warm architectural gold wave
+      // Fragment shader - elegant, very subtle architectural gold wave running along the bottom
       const fsSource = `
         precision highp float;
         uniform vec2 resolution;
@@ -31,17 +31,22 @@ export function WebGLShader() {
 
         void main() {
           vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+          
+          // Shift the golden wave line down to the bottom (-0.75 y-offset) and slow it down
+          float waveY = p.y + 0.75 + sin((p.x + time * 0.25) * 0.8) * 0.15;
           float d = length(p) * 0.05;
 
-          float rx = p.x * (1.0 + d);
-          float gx = p.x;
-          float bx = p.x * (1.0 - d);
+          float rx = waveY * (1.0 + d);
+          float gx = waveY;
+          float bx = waveY * (1.0 - d);
 
-          float r = 0.05 / abs(p.y + sin((rx + time * 0.5) * 1.0) * 0.5);
-          float g = 0.05 / abs(p.y + sin((gx + time * 0.5) * 1.0) * 0.5);
-          float b = 0.05 / abs(p.y + sin((bx + time * 0.5) * 1.0) * 0.5);
+          // Make the gold line thinner (0.015 instead of 0.05) and softer so it doesn't glare
+          float r = 0.018 / abs(rx);
+          float g = 0.015 / abs(gx);
+          float b = 0.011 / abs(bx);
 
-          gl_FragColor = vec4(r * 1.0, g * 0.85, b * 0.65, 1.0);
+          // Render gold line with elegant overlay blend
+          gl_FragColor = vec4(r * 1.0, g * 0.85, b * 0.65, 0.8);
         }
       `
 
